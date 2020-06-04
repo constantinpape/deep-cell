@@ -58,12 +58,13 @@ def load_training_data(root, image_folder, labels_folder, ext):
     # maybe these should be exposed
     lower_percentile = 1
     upper_percentile = 99.8
+    ax_norm = (0, 1)  # independent normalization for multichannel images
 
     # load the images, check tham and preprocess the data
     train_images = [imageio.imread(im) for im in train_images]
     train_labels = [imageio.imread(im) for im in train_labels]
     n_channels = check_training_images(train_images, train_labels)
-    train_images = [normalize(im, lower_percentile, upper_percentile) for im in train_images]
+    train_images = [normalize(im, lower_percentile, upper_percentile, axis=ax_norm) for im in train_images]
     train_labels = [fill_label_holes(im) for im in train_labels]
 
     return train_images, train_labels, n_channels

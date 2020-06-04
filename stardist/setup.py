@@ -10,7 +10,7 @@ setup(
     entry_points={
         "console_scripts": [
             "train_stardist_2d = training.train_stardist_2d:main",
-            "predict_stardist = prediction.predict_stardist:main"
+            "predict_stardist_2d = prediction.predict_stardist_2d:main"
         ]
     },
 )

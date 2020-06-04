@@ -7,9 +7,14 @@ dependencies:
     - imageio
     - h5py
     - napari
+    - python 3.7
     - pip
     - scikit-image
     - tqdm
     - pip:
-        - stardist
+        # I think this is the gpu version, it appears that tensorflow changed it's naming convention at some point:
+        # tensorflow < 2 gpu version is called tensorflow
+        # tensorflow >= 2 gpu version is called tensorflow-gpu
+        # In summary, tensorflow is a hot mess...
         - tensorflow==1.15
+        - stardist

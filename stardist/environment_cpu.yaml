@@ -8,6 +8,7 @@ dependencies:
     - h5py
     - napari
     - pip
+    - python 3.7
     - scikit-image
     - tensorflow 1.15
     - tqdm
