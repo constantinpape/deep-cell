@@ -32,3 +32,11 @@ module load OpenMPI/3.1.4-GCC-7.3.0-2.30
 
 
 ## Running the scripts
+
+You can run the following scripts to train or predict a stardist model:
+```
+train_stardist_2d /path/to/root /path/to/model
+```
+```
+predict_stardist_2d /path/to/root /path/to/model
+```

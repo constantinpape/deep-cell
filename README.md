@@ -3,7 +3,8 @@
 Training and inference scripts for deep learning tools for cell segmentation in microscopy images.
 
 Available tools:
-- [stardist](https://github.com/mpicbg-csbd/stardist)
+- [stardist](https://github.com/mpicbg-csbd/stardist): stardist for convex object segmentation
+- embl-tools: general purpose tools for visualising training data and predictions as well as running gpu jobs on the embl cluster
 
 
 ## Data Layout
