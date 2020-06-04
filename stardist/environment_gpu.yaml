@@ -1,0 +1,15 @@
+channels:
+    - conda-forge
+    - defaults
+name:
+    stardist-gpu
+dependencies:
+    - imageio
+    - h5py
+    - napari
+    - pip
+    - scikit-image
+    - tqdm
+    - pip:
+        - stardist
+        - tensorflow==1.15
