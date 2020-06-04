@@ -45,7 +45,7 @@ def submit_slurm(script, input_, n_threads=7, n_gpus=1,
     """ Submit python script that needs gpus with given inputs on a slurm node.
     """
 
-    tmp_folder = os.path.expanduser('~/.deep-cell')
+    tmp_folder = os.path.expanduser('~/.deep-cell/slurm')
     os.makedirs(tmp_folder, exist_ok=True)
 
     print("Submitting training script %s to cluster" % script)

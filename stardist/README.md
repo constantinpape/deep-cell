@@ -35,8 +35,16 @@ module load OpenMPI/3.1.4-GCC-7.3.0-2.30
 
 You can run the following scripts to train or predict a stardist model:
 ```
-train_stardist_2d /path/to/root /path/to/model
+CUDA_VISIBLE_DEVICES=0 train_stardist_2d /path/to/data /path/to/model
 ```
 ```
-predict_stardist_2d /path/to/root /path/to/model
+CUDA_VISIBLE_DEVICES=0 predict_stardist_2d /path/to/data /path/to/model
+```
+
+The `CUDA_VISIBLE_DEVICES=0` part determines which gpu is used. If you have a machine with multiple GPUs and don't want to
+use the first one, you need to change the `0` to the id of the GPU you want to use.
+
+In order to run these scripts on the embl via slurm, you can use the `submit_slurm` script from `deep_cell.utils`, e.g.
+```
+submit_slurm train_stardist_2d /path/to/data /path/to/model
 ```

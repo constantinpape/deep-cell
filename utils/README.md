@@ -19,6 +19,6 @@ view_data /path/to/folder
 that can be used to visualise training data and predictions stored in our training data layout.
 
 ```
-submit_to_slurm <SCRIPT_NAME> <SCRIPT_ARGS>
+submit_slurm <SCRIPT_NAME> <SCRIPT_ARGS>
 ```
 to run an arbitrary script on the cluster gpu queue.
