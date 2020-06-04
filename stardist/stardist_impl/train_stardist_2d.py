@@ -37,7 +37,7 @@ def check_training_images(train_images, train_labels):
     return n_channels
 
 
-def load_training_data(root, image_folder, labels_folder, ext):
+def load_training_data(root, image_folder, labels_folder, ext, multichannel):
 
     # get the image and label mask paths and validate them
     image_pattern = os.path.join(root, image_folder, f'*{ext}')
@@ -61,7 +61,11 @@ def load_training_data(root, image_folder, labels_folder, ext):
     ax_norm = (0, 1)  # independent normalization for multichannel images
 
     # load the images, check tham and preprocess the data
-    train_images = [imageio.imread(im) for im in train_images]
+    if multichannel:
+        # NOTE, we assume that images are stored as channel first, but stardist expects channel last
+        train_images = [imageio.volread(im).transpose((1, 2, 0)) for im in train_images]
+    else:
+        train_images = [imageio.imread(im) for im in train_images]
     train_labels = [imageio.imread(im) for im in train_labels]
     n_channels = check_training_images(train_images, train_labels)
     train_images = [normalize(im, lower_percentile, upper_percentile, axis=ax_norm) for im in train_images]
@@ -146,9 +150,10 @@ def train_model(x_train, y_train, x_val, y_val, save_path,
 
 
 def train_stardist_model(root, model_save_path, image_folder, labels_folder, ext,
-                         validation_fraction, patch_size):
+                         validation_fraction, patch_size, multichannel):
     print("Loading training data")
-    train_images, train_labels, n_channels = load_training_data(root, image_folder, labels_folder, ext)
+    train_images, train_labels, n_channels = load_training_data(root, image_folder, labels_folder,
+                                                                ext, multichannel)
     print("Found", len(train_images), "images and label masks for training")
 
     x_train, y_train, x_val, y_val = make_train_val_split(train_images, train_labels,
@@ -181,12 +186,14 @@ def main():
                         help="The fraction of available data that is used for validation, default: .1")
     parser.add_argument('--patch_size', type=int, nargs=2, default=[256, 256],
                         help="Size of the image patches used to train the network, default: 256, 256")
+    parser.add_argument('--multichannel', type=int, default=0,
+                        help="Do we have multichannel images? Default: 0")
 
     args = parser.parse_args()
     train_stardist_model(args.root, args.model_save_path,
                          args.image_folder, args.labels_folder,
                          args.ext, args.validation_fraction,
-                         tuple(args.patch_size))
+                         tuple(args.patch_size), bool(args.multichannel))
 
 
 if __name__ == '__main__':

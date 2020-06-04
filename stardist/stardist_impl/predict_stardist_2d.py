@@ -20,9 +20,9 @@ def get_image_files(root, image_folder, ext):
     return images
 
 
-# TODO could be done more efficiently, see
+# could be done more efficiently, see
 # https://github.com/hci-unihd/batchlib/blob/master/batchlib/segmentation/stardist_prediction.py
-def run_prediction(image_files, model_path, root, prediction_folder):
+def run_prediction(image_files, model_path, root, prediction_folder, multichannel):
 
     # load the model
     model_name, model_root = os.path.split(model_path)
@@ -38,7 +38,10 @@ def run_prediction(image_files, model_path, root, prediction_folder):
     ax_norm = (0, 1)  # independent normalization for multichannel images
 
     for im_file in tqdm(image_files, desc="run stardist prediction"):
-        im = imageio.imread(im_file)
+        if multichannel:
+            im = imageio.imread(im_file).transpose((1, 2, 0))
+        else:
+            im = imageio.imread(im_file)
         im = normalize(im, lower_percentile, upper_percentile, axis=ax_norm)
         pred, _ = model.predict_instances(im)
 
@@ -47,13 +50,13 @@ def run_prediction(image_files, model_path, root, prediction_folder):
         imageio.imsave(save_path, pred)
 
 
-def predict_stardist(root, model_path, image_folder, prediction_folder, ext):
+def predict_stardist(root, model_path, image_folder, prediction_folder, ext, multichannel):
     print("Loading images")
     image_files = get_image_files(root, image_folder, ext)
     print("Found", len(image_files), "images for prediction")
 
     print("Start prediction ...")
-    run_prediction(image_files, model_path, root, prediction_folder)
+    run_prediction(image_files, model_path, root, prediction_folder, multichannel)
     print("Finished prediction")
 
 
@@ -66,9 +69,11 @@ def main():
     parser.add_argument('--prediction_folder', type=str, default='predictions',
                         help="Name of the folder where the predictions should be stored, default: predictions.")
     parser.add_argument('--ext', type=str, default='.tif', help="Image file extension, default: .tif")
+    parser.add_argument('--multichannel', type=int, default=0, help="Do we have multichannel images? Default: 0")
 
     args = parser.parse_args()
-    predict_stardist(args.root, args.model_path, args.image_folder, args.prediction_folder, args.ext)
+    predict_stardist(args.root, args.model_path, args.image_folder, args.prediction_folder,
+                     args.ext, args.multichannel)
 
 
 if __name__ == '__main__':

@@ -9,8 +9,8 @@ setup(
     license='MIT',
     entry_points={
         "console_scripts": [
-            "view_data = visualisation.view_data:main",
-            "submit_to_slurm = cluster.submit_to_slurm:main"
+            "view_data = utils_impl.view_data:main",
+            "submit_slurm = utils_impl.submit_to_slurm:main"
         ]
     },
 )

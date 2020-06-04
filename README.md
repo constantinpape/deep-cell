@@ -4,7 +4,7 @@ Training and inference scripts for deep learning tools for cell segmentation in 
 
 Available tools:
 - [stardist](https://github.com/mpicbg-csbd/stardist): stardist for convex object segmentation
-- embl-tools: general purpose tools for visualising training data and predictions as well as running gpu jobs on the embl cluster
+- utils: functionality for visualisation and job submission on compute clusters
 
 
 ## Data Layout
@@ -18,4 +18,4 @@ root-folder/
 ```
 The folder `images` contains the training image data and the labels the training label data.
 The corresponding images and labels **must have exactly the same name**.
-The data should be stored in tif format.
+The data should be stored in tif format. For multi-channel images, we assume that they are stored channel-first, i.e. in cyx order.
