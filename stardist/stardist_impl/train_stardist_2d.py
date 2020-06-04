@@ -145,7 +145,7 @@ def train_model(x_train, y_train, x_val, y_val, save_path,
     model = StarDist2D(config, name=save_name, basedir=save_root)
 
     model.train(x_train, y_train, validation_data=(x_val, y_val), augmenter=augmenter)
-    optimal_parameters = model.optimize_threshold(x_val, y_val)
+    optimal_parameters = model.optimize_thresholds(x_val, y_val)
     return optimal_parameters
 
 
@@ -166,7 +166,7 @@ def train_stardist_model(root, model_save_path, image_folder, labels_folder, ext
     print("You can connect to the tensorboard by typing 'tensorboaed --logdir=.' in the folder where the training runs")
     optimal_parameters = train_model(x_train, y_train, x_val, y_val, model_save_path,
                                      n_channels, patch_size)
-    print("The mode has been trained and was saved to", model_save_path)
+    print("The model has been trained and was saved to", model_save_path)
     print("The following optimal parameters were found:", optimal_parameters)
 
 
