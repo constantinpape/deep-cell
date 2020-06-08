@@ -8,6 +8,7 @@ import numpy as np
 from csbdeep.utils import normalize
 from stardist import fill_label_holes, gputools_available
 from stardist.models import Config2D, StarDist2D
+from stardist_model_to_fiji import stardist_model_to_fiji
 
 
 def check_training_data(train_images, train_labels):
@@ -173,9 +174,7 @@ def train_stardist_model(root, model_save_path, image_folder, labels_folder, ext
     print("The following optimal parameters were found:", opt_params)
 
     if save_for_fiji:
-        fiji_save_path = os.path.join(model_save_path, 'TF_SavedModel.zip')
-        print("Saving model for fiji", fiji_save_path)
-        model.export_TF()
+        stardist_model_to_fiji(model_save_path, model)
 
 
 # use configarparse?

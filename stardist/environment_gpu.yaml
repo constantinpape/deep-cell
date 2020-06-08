@@ -11,6 +11,6 @@ dependencies:
     - pip
     - scikit-image
     - tqdm
-    - tensorflow-gpu 1.15
+    - tensorflow-gpu 1.14
     - pip:
         - stardist
