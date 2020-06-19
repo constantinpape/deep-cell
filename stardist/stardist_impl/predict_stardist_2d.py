@@ -25,7 +25,7 @@ def get_image_files(root, image_folder, ext):
 def run_prediction(image_files, model_path, root, prediction_folder, multichannel):
 
     # load the model
-    model_name, model_root = os.path.split(model_path)
+    model_root, model_name = os.path.split(model_path.rstrip('/'))
     model = StarDist2D(None, name=model_name, basedir=model_root)
 
     res_folder = os.path.join(root, prediction_folder)
@@ -39,7 +39,7 @@ def run_prediction(image_files, model_path, root, prediction_folder, multichanne
 
     for im_file in tqdm(image_files, desc="run stardist prediction"):
         if multichannel:
-            im = imageio.imread(im_file).transpose((1, 2, 0))
+            im = imageio.volread(im_file).transpose((1, 2, 0))
         else:
             im = imageio.imread(im_file)
         im = normalize(im, lower_percentile, upper_percentile, axis=ax_norm)

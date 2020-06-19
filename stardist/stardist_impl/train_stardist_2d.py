@@ -171,6 +171,7 @@ def train_stardist_model(root, model_save_path, image_folder, labels_folder, ext
 
 
 # use configarparse?
+# TODO set batch size
 # TODO enable fine-tuning on pre-trained
 # TODO enable excluding images by name
 def main():

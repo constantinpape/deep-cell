@@ -48,3 +48,5 @@ In order to run these scripts on the embl via slurm, you can use the `submit_slu
 ```
 submit_slurm train_stardist_2d /path/to/data /path/to/model
 ```
+
+Scripts to train and predict with a 3d stardist model are also available: `train_stardist_3d`, `predict_stardist_3d`.
