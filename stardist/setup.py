@@ -13,6 +13,7 @@ setup(
             "predict_stardist_2d = stardist_impl.predict_stardist_2d:main",
             "train_stardist_3d = stardist_impl.train_stardist_3d:main",
             "predict_stardist_3d = stardist_impl.predict_stardist_3d:main",
+            "stardist_model_to_fiji = stardist_impl.stardist_model_to_fiji:main"
         ]
     },
 )
