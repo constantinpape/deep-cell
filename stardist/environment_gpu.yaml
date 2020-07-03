@@ -5,6 +5,7 @@ name:
     stardist-gpu
 dependencies:
     - imageio
+    - jupyter
     - h5py
     - napari
     - python 3.7
