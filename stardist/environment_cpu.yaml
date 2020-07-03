@@ -5,6 +5,7 @@ name:
     stardist-cpu
 dependencies:
     - imageio
+    - jupyter
     - h5py
     - napari
     - pip
