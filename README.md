@@ -41,16 +41,16 @@ In order to set up a shared conda installation  for multiple users on linux infr
 6. Choose the installation directory and start the installation. Make sure that all users have read and execute permissions for the installation location.
 7. After the installation is finished, choose `no` when asked `Do you wish to initialize Miniconda3 by running conda init?`.
 8. This will end the installation and print out a few lines explaining how to activate the conda base environment.
-9. Copy the line `eval "$(/path/to/miniconda3/bin/conda shell.YOUR_SHELL_NAME hook)"`and paste it into a file `run_conda.sh`.
+9. Copy the line `eval "$(/path/to/miniconda3/bin/conda shell.YOUR_SHELL_NAME hook)"`and paste it into a file `init_conda.sh`.
 10. Replace `YOUR_SHELL_NAME` with `bash` (assuming you and your users are using a bash shell; for zshell, replace with `zsh`, etc.).
 
-Now, the conda base environment can be activated via running `source run_conda.sh`. 
+Now, the conda base environment can be activated via running `source init_conda.sh`. 
 Use it to set up the environments to make the applications available to your users.
 Important: in order to install version conflicts use separate environments for different application and don't install them to the base environment!
 
 In order for users to activate one of these environments, they will need to first activate the base environment and then the desired env:
 ```shell
-source run_conda.sh
+source init_conda.sh
 conda activate <ENV_NAME>
 ```
 
